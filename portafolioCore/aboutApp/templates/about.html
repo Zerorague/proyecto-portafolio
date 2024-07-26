@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %} ABOUT {% endblock %}
+
+{% block imagen-class %} about {% endblock %}
+
+{% block cabecera %} Curriculum Vitae {% endblock %}
+
+{% block sub-cabecera %} Julio San Martín Batarce {% endblock %}
+
+{% block content %}
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+    <div class="container">
+        <div class="row d-flex flex-column flex-lg-row justify-content-start align-items-center">
+            <div class="col-4 offset-md-auto">
+                <img class="img-fluid img-thumbnail  img-perfil " src="{% static 'core/img/foto-perfil.jpg' %}" alt="">
+            </div>
+            <div class="col-6">
+                <h4>Busco desarrollarme como profesional, así también seguir aprendiendo y adquiriendo nuevos
+                    conocimientos. Es por ello que respetuosamente solicito una oportunidad de trabajar con ustedes de
+                    manera responsable.</h4>
+            </div>
+        </div>
+
+        <div class="row d-flex pt-5">
+            <div class="col-12">
+
+                <h2 class="fw-bold">Formación Académica</h2>
+                {% for formacion in formaciones %}
+                <h3>Formación Nº {{ forloop.counter }}</h3>
+                <p><strong>Título obtenido:</strong> {{formacion.carrera}}</p>
+                <p><strong>Institución:</strong> {{formacion.institucion}}</p>
+                <p><strong>Descripción:</strong> {{formacion.descripcion}}</p>
+                {% if formacion.egreso %}
+                <p><strong>Egreso:</strong> {{formacion.egreso|date:"Y"}}</p>
+                {% else %}
+                <p><strong>Egreso:</strong> En curso...</p>
+                {% endif %}
+
+
+                <hr>
+                {% endfor %}
+
+
+                <h2 class="fw-bold">Experiencia</h2>
+                {% for trabajo in trabajos %}
+                <h3>Trabajo Nº {{ forloop.counter }}</h3>
+                <p><strong>{{trabajo.titulo}}</strong>
+                <p><strong>Empresa:</strong> {{trabajo.empresa}}</p>
+                <p><strong>Descripción:</strong> {{trabajo.descripcion}}</p>
+                {% if trabajo.egreso %}
+                <p><strong>Desde:</strong> {{trabajo.ingreso|date:"M Y"}} <strong>Hasta:</strong>
+                    {{trabajo.egreso|date:"M Y"}}</p>
+                {% else %}
+                <p><strong>Desde:</strong> {{trabajo.ingreso|date:"M Y"}} <strong>Hasta:</strong> Actual...</p>
+                {% endif %}
+
+
+                <hr>
+                {% endfor %}
+
+                <h2 class="fw-bold">Habilidades</h2>
+                <section class="skills" id="skills">
+                    <div class="skills__container" id="skills">
+                        {% for habilidad in habilidades %}
+                        <div class="card__skills">
+                            <div class="skill__thumbnail">
+                                <img class="skill__logo" src="{{habilidad.imagen.url}}" alt="{{habilidad.nombre}}"
+                                    title="{{habilidad.nivel.nivel}}">
+                            </div>
+
+                            <div class="skill__texto">
+                                <p class="skill__titulo">{{habilidad.nombre}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </section>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

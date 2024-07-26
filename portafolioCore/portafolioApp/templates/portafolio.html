@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block tittle %} PORTAFOLIO {% endblock %}
+
+{% block imagen-class %} portfolio {% endblock %}
+
+{% block cabecera %} PORTAFOLIO {% endblock %}
+
+{% block sub-cabecera %} Planos y proyectos... {% endblock %}
+
+{% block content %}
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+    <div class="container">
+        <!-- Proyecto -->
+        {% for proyecto in proyectos %}
+        <div class="row project mb-5">
+            <div class="col-lg-3 col-md-4 offset-lg-1">
+                <img class="img-fluid" src="{{proyecto.image.url}}" alt="">
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <h2 class="section-heading title">{{proyecto.title}}</h2>
+                <p>{{proyecto.description}}</p>
+                {% if proyecto.link %}
+                <p><a class="btn btn-sm btn-success" href="{{proyecto.link}}">Más información</a></p>
+                {% else %}
+                <p class="btn btn-sm btn-warning">En desarrollo...</p>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
